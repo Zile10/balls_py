@@ -1,17 +1,12 @@
-from js import console, document, window
+from js import console, document, window, requestAnimationFrame
 from pyodide.ffi.wrappers import add_event_listener
+from pyodide.ffi import create_proxy
 import math, random
 
 canvas = Element('canvas').element
 ctx = canvas.getContext('2d')
 
 canvas.style.border = '1px solid black'
-def resizeCanvas(event):
-    canvas.width = window.innerWidth - 18
-    canvas.height = window.innerHeight - 18
-resizeCanvas('yes')
-
-add_event_listener(window,"resize", resizeCanvas)
 
 class Ball:
     def __init__(self, config):
@@ -45,17 +40,19 @@ class Ball:
         self.y += self.dy
 
 
-def init(event):
-    balls = []
+colors = ['crimson', 'cyan', 'darkcyan', 'pink', 'violet', 'slategrey']
+balls = []
+
+def init():
+    balls.clear()
 
     for i in range(100):
-        radius = 20 + random.random() * 10
-        x = canvas.width * ((random.random() + radius) - 2*radius)
-        y = canvas.height * ((random.random() + radius) - 2*radius)
+        radius = 30 + random.random() * 10
+        x =  random.random() * (canvas.width - 4 * radius) + radius
+        y = random.random() * (canvas.height - 4 * radius) + radius
         dx = random.random() * 5 - 2.5
         dy = random.random() * 5 - 2.5
-        color = 'crimson'
-
+        color = colors[math.floor(random.random() * 6)]
         balls.append(
             Ball({
                 'radius': radius,
@@ -66,8 +63,20 @@ def init(event):
                 'color': color,
             })
         )
-    
+        
+init()
+
+def animate():
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
     for ball in balls:
         ball.draw()
 
-add_event_listener(document, 'DOMContentLoaded', init)
+window.setInterval(create_proxy(animate), 25)
+
+def resizeCanvas(event):
+    canvas.width = window.innerWidth - 18
+    canvas.height = window.innerHeight - 18
+    init()
+resizeCanvas('yes')
+
+add_event_listener(window,"resize", resizeCanvas)
