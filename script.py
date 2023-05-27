@@ -63,7 +63,7 @@ def init():
                 'color': color,
             })
         )
-        
+
 init()
 
 def animate():
@@ -80,3 +80,4 @@ def resizeCanvas(event):
 resizeCanvas('yes')
 
 add_event_listener(window,"resize", resizeCanvas)
+add_event_listener(window,"click", resizeCanvas)
