@@ -1,4 +1,4 @@
-from js import console, document, window, requestAnimationFrame
+from js import document, window
 from pyodide.ffi.wrappers import add_event_listener
 from pyodide.ffi import create_proxy
 import math, random
