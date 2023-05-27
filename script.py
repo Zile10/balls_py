@@ -47,12 +47,12 @@ def init():
     balls.clear()
 
     for i in range(100):
-        radius = 30 + random.random() * 10
-        x =  random.random() * (canvas.width - 4 * radius) + radius
-        y = random.random() * (canvas.height - 4 * radius) + radius
-        dx = random.random() * 5 - 2.5
-        dy = random.random() * 5 - 2.5
-        color = colors[math.floor(random.random() * 6)]
+        radius = random.uniform(30, 40)
+        x =  random.uniform(2*radius, canvas.width - 2*radius)
+        y = random.uniform(2*radius, canvas.height - 2*radius)
+        dx = random.uniform(-5, 5)
+        dy = random.uniform(-5, 5)
+        color = colors[random.randint(0, 5)]
         balls.append(
             Ball({
                 'radius': radius,
