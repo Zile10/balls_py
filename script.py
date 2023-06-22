@@ -22,6 +22,7 @@ class Ball:
     def draw(self):
         ctx.beginPath()
         ctx.fillStyle = self.color
+        ctx.lineWidth = 1
         ctx.strokeStyle = 'black'
         ctx.arc(self.x, self.y, self.radius, 0, 2* math.pi)
         ctx.fill()
@@ -68,10 +69,29 @@ init()
 
 def animate():
     ctx.clearRect(0, 0, canvas.width, canvas.height)
+    ctx.strokeStyle = '#306998'
+    ctx.font = '900 120px sans-serif'
+    ctx.shadowColor = '#306998'
+    ctx.shadowBlur = 7
+    ctx.lineWidth = 4
+    ctx.textAlign = 'center'
+    ctx.textBaseline = 'middle'
+    ctx.strokeText('Python', canvas.width/2, canvas.height/2)
+
+
+    ctx.fillStyle = '#ffd43b'
+    ctx.font = '900 40px sans-serif'
+    ctx.shadowColor = '#ffd43b'
+    ctx.lineWidth = 2
+    ctx.textAlign = 'center'
+    ctx.textBaseline = 'middle'
+    ctx.fillText('In HTML With PyScript', canvas.width/2, canvas.height/2 + 80)
+    ctx.shadowBlur = 0
+
     for ball in balls:
         ball.draw()
 
-window.setInterval(create_proxy(animate), 25)
+window.setInterval(create_proxy(animate), 20)
 
 def resizeCanvas(event):
     canvas.width = window.innerWidth - 18
