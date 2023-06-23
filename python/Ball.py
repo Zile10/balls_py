@@ -6,8 +6,10 @@ class Ball:
         self.dy = config['dy']
         self.radius = config['radius']
         self.color = config['color']
+        self.id = config['id']
         self.gravity = 1
         self.friction = 0.97
+        self.isDragging = False
     
     def draw(self):
         ctx.beginPath()
@@ -20,7 +22,19 @@ class Ball:
         ctx.stroke()
         self.update()
 
-    def update(self):
+    def drag(self):
+        self.dx = 0; self.dy = 0
+        self.x += mouse['canvasX'] - self.x
+        self.y += mouse['canvasY'] - self.y
+
+
+    def update(self):   
+        if mouse['isDown'] != True:
+            mouse['dragging'] = None
+
+        if mouse['dragging'] == self.id:
+            self.drag()
+
         if self.x + self.radius + self.dx > canvas.width or self.x - self.radius + self.dx < 0:
             self.dx = - self.dx * self.friction
         if self.y + self.radius + self.dy > canvas.height or self.y - self.radius + self.dy < 0:
