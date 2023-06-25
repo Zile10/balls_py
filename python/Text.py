@@ -1,5 +1,5 @@
 class Text:
-    def __init__(self, x, y, config) -> None:
+    def __init__(self, text, x, y, config) -> None:
         self.text
         self.x
         self.y
