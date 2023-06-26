@@ -11,8 +11,8 @@ canvas.style.border = '1px solid black'
 mouse = {
     'x': 0,
     'y': 0,
-    'canvasX': 0 - (canvas.getBoundingClientRect().x + 1),
-    'canvasY': 0 - (canvas.getBoundingClientRect().y + 1),
+    'canvasX': 0 + (canvas.getBoundingClientRect().x + 1),
+    'canvasY': 0 + (canvas.getBoundingClientRect().y + 1),
     'isDown': False,
     'dragging': None
 }
@@ -44,6 +44,8 @@ def init():
 
 init()
 
+mouse['radius'] = 25
+
 def animate():
     ctx.clearRect(0, 0, canvas.width, canvas.height)
 
@@ -70,10 +72,6 @@ def mouseMove(e):
     mouse['canvasX'] = mouse['x'] + 9
     mouse['canvasY'] = mouse['y'] + 9
 
-# def dragger(e):
-#     for ball in balls:
-#         if ball.x - ball.radius < mouse['canvasX'] and ball.x + ball.radius > mouse['canvasX'] and ball.y - ball.radius < mouse['canvasY'] and ball.y + ball.radius > mouse['canvasY'] :
-#             ball.drag()
 def mouseDown(e):
     mouse['isDown'] = True
     for ball in balls:
@@ -91,4 +89,4 @@ add_event_listener(canvas,"mousedown", mouseDown)
 add_event_listener(canvas,"mouseup", mouseUp)
 
 
-js.console.clear()
+console.clear()
