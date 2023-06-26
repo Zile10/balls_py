@@ -1,9 +1,15 @@
 class Text:
-    def __init__(self, text, x, y, config) -> None:
-        self.text
-        self.x
-        self.y
+    def __init__(self, config):
+        self.text = None
+        self.x = None
+        self.y = None
         self.config
+
+    def write(text, x, y):
+        self.text = self.text
+        self.x = self.x
+        self.y = self.y
+        
 
 
 

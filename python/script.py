@@ -49,8 +49,18 @@ mouse['radius'] = 25
 def animate():
     ctx.clearRect(0, 0, canvas.width, canvas.height)
 
+    mouseOverBall = False
     for ball in balls:
         ball.draw()
+        isUnderMouse = ball.x - ball.radius < mouse['canvasX'] and ball.x + ball.radius > mouse['canvasX'] and ball.y - ball.radius < mouse['canvasY'] and ball.y + ball.radius > mouse['canvasY']
+        if isUnderMouse:
+            mouseOverBall = True
+
+    if mouseOverBall:
+        canvas.style.cursor = 'grab'
+        if mouse['isDown']: 
+            canvas.style.cursor = 'grabbing'
+    else: canvas.style.cursor = 'auto'
 
     ctx.fillStyle = 'rgba(0,0,0, 0.3)'
     ctx.fillRect(0, 0, canvas.width, canvas.height)
@@ -71,17 +81,25 @@ def mouseMove(e):
     mouse['y'] = e.clientY
     mouse['canvasX'] = mouse['x'] + 9
     mouse['canvasY'] = mouse['y'] + 9
+    
 
 def mouseDown(e):
     mouse['isDown'] = True
+    canvas.style.cursor = 'auto'
     for ball in balls:
         isUnderMouse = ball.x - ball.radius < mouse['canvasX'] and ball.x + ball.radius > mouse['canvasX'] and ball.y - ball.radius < mouse['canvasY'] and ball.y + ball.radius > mouse['canvasY']
         if isUnderMouse and mouse['isDown']:
             mouse['dragging'] = ball.id
+            canvas.style.cursor = 'grabbing'
+
+
+
 
 def mouseUp(e):
     mouse['isDown'] = False
     mouse['dragging'] = None
+    canvas.style.cursor = 'auto'
+
 
 add_event_listener(window,"resize", resizeCanvas)
 add_event_listener(canvas,"mousemove", mouseMove)
