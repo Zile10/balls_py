@@ -11,8 +11,8 @@ canvas.style.border = '1px solid black'
 mouse = {
     'x': 0,
     'y': 0,
-    'canvasX': 9,
-    'canvasY': 9,
+    'canvasX': 0 - (canvas.getBoundingClientRect().x + 1),
+    'canvasY': 0 - (canvas.getBoundingClientRect().y + 1),
     'isDown': False,
     'dragging': None
 }
