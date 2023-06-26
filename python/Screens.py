@@ -15,6 +15,3 @@ class Screen:
         # Draw Foreground
         for elem in self.foreground:
             elem.draw()
-    
-    def 
-    
